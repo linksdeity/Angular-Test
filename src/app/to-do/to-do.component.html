@@ -1,0 +1,13 @@
+<h1>
+  to-do list:
+</h1>
+
+<p *ngFor = "let task of TaskList; let i = index" [ngClass] = "task.styleTime">
+  
+  <button (click)='buttonClick(i)'>{{task.buttonText}}</button>
+
+  {{task.taskName}}
+
+</p> 
+
+<p>{{done}}</p>
