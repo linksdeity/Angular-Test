@@ -15,6 +15,8 @@ export class ToDoComponent implements OnInit {
 
   done: string = "";
 
+  myCounter: number = 0;
+
   TaskList: Task[] = [
     {isDone: false, taskName: 'Walk Dog', styleTime: 'taskNotDone', buttonText: 'Done'},
     {isDone: false, taskName: 'Make Bed', styleTime: 'taskNotDone', buttonText: 'Done'},
@@ -22,13 +24,33 @@ export class ToDoComponent implements OnInit {
     {isDone: false, taskName: 'Mow Lawn', styleTime: 'taskNotDone', buttonText: 'Done'}
   ];
 
+  DoneChecker(): boolean{
+   this.myCounter = 0;
+
+    this.TaskList.forEach(task => {
+      if (task.isDone == true)
+      {
+        this.myCounter ++;
+      }
+    });
+
+    if(this.myCounter == this.TaskList.length)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
   buttonClick(index: number){
     if(this.TaskList[index].isDone == false)
     {
       this.TaskList[index].isDone = true;
       this.TaskList[index].styleTime = 'taskDone'
       this.TaskList[index].buttonText = "oops..."
-      if(this.TaskList[0].isDone == true && this.TaskList[1].isDone == true && this.TaskList[2].isDone == true && this.TaskList[3].isDone == true)
+      if(this.DoneChecker() == true)
       {
         this.done = "ALL DONE!"
       }
